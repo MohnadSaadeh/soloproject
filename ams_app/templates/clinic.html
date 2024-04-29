@@ -1,0 +1,137 @@
+
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+<head><script src="/docs/5.3/assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Clinic</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> 
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="/docs/5.3/assets/js/color-modes.js"></script>
+    <script src="{% static 'js/scripts.js' %}" defer></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+<link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Favicons -->
+<link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
+<meta name="theme-color" content="#712cf9">
+
+
+
+
+</head>
+<body class="bg-body-tertiary">
+
+
+
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+<div class="container-fluid">
+    <h4 class="navbar-brand" >{{clinics.clinic_name}}</h4>
+<button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+        <a class="btn btn-outline-secondary" aria-current="page" href="/">Dashboard</a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="btn btn-outline-secondary"href="/pacients_page">Pacients Page</a>
+    </li>
+        <a class="nav-link" href="#">
+            Pacients 
+            <span class="badge text-bg-light rounded-pill align-text-bottom"> {{number_of_appointments}} </span>
+        </a>
+    </ul>
+    
+</div>
+
+</div>
+</nav>
+
+
+<main class="container">
+<div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+<img class="me-3" src="/docs/5.3/assets/brand/bootstrap-logo-white.svg" alt="" width="48" height="38">
+<div class="lh-1">
+    <h1 class="h6 mb-0 text-white lh-1">All {{clinics.clinic_name}} Apointments</h1>
+    <small>Since 2011</small>
+</div>
+</div>
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+
+<h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
+
+{% for All_C_Appo in all_appointments %}
+
+<div class="d-flex text-body-secondary pt-3">
+    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+    <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+    <div class="d-flex justify-content-between">
+        <strong class="text-gray-dark">@{{All_C_Appo.appointment_date}}</strong>
+        <a class="btn btn-outline-danger" href="/report_page/{{All_C_Appo.id}}/{{All_C_Appo.pacient_id}}">Make a Report</a>
+    </div>
+    <span class="d-block">@{{All_C_Appo.appointment_details}}</span>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endfor %}
+
+<small class="d-block text-end mt-3">
+    <a href="#">All updates</a>
+</small>
+
+</div>
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+<h6 class="border-bottom pb-2 mb-0">Vailable Appointments</h6>
+{% for vailable_appointment in vailable_appointments %}
+<div class="d-flex text-body-secondary pt-3">
+    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+    <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+    <div class="d-flex justify-content-between">
+        <strong class="text-gray-dark">{{vailable_appointment.appointment_date}}</strong>
+        <a href="#">Follow</a>
+    </div>
+    <span class="d-block">@username</span>
+    </div>
+</div>
+{% endfor %}
+
+
+
+<small class="d-block text-end mt-3">
+    <a href="#">All suggestions</a>
+</small>
+</div>
+</main>
+<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script src="offcanvas-navbar.js"></script></body>
+</html>

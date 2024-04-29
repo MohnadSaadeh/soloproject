@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Adding a Clinic</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> 
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="/docs/5.3/assets/js/color-modes.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-json/2.6.0/jquery.json.min.js" integrity="sha512-QE2PMnVCunVgNeqNsmX6XX8mhHW+OnEhUhAWxlZT0o6GFBJfGRCfJ/Ut3HGnVKAxt8cArm7sEqhq2QdSF0R7VQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <header data-bs-theme="dark">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">ClinicMate</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/pacients_page">Our Pacients</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link " href="#" >Our Clinics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#" >All Doctors</a>
+                    </li>
+                </ul>
+            <div class="login_admin" >
+                <h5><a href="/logout"> Log Out </a></h5>
+        
+                
+            </div>
+            
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            </div>
+        </div>
+        </nav>
+        </header>
+
+
+<main>
+<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+<!-- -------------------------------------------------------------------------------- -->
+
+
+    <section class="vh-100" style="background-color: #eee;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                    <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+        
+                        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Add a clinic</p>
+        
+                        <form class="mx-1 mx-md-4" action="/add_clinic" method="post">
+                            {% csrf_token %}
+                        <div class="d-flex flex-row align-items-center mb-4">
+                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                <input name="the_clinic_name" type="text" id="form3Example1c" class="form-control" />
+                                <label class="form-label" for="form3Example1c">Clinic Name</label>
+                            </div>
+                            
+                        </div>
+        
+                        <div class="d-flex flex-row align-items-center mb-4">
+                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                <input  name="clinic_specialty" type="text" id="form3Example3c" class="form-control" />
+                                <label class="form-label" for="form3Example3c">Clinic specialty</label>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row align-items-center mb-4">
+                            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                <textarea name="clinic_details" id="form3Example3c"  class="form-control" cols="2" rows="2"></textarea>
+                                <label class="form-label" for="form3Example3c">Clinic Details</label>
+                            </div>
+                        </div>
+                        {% if messages %}
+                        <ul class="messages">    
+                            {% for message in messages %}    
+                                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        {% if messages.success %}
+                            <p class="message_success" >You have successfully registered as Admin!  </p>
+                        {% endif %}
+                        {% endif %}
+    
+                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg">Create a Clinic</button>
+                        </div>
+        
+                        </form>
+        
+                    </div>
+                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                        <img src="{% static 'img\addclinicpic.jpg' %}"
+                        class="img-fluid" alt="Sample image">
+        
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
+    
+<!-- -------------------------------------------------------------------------------- -->
+</div><!-- /.container -->
+
+<!-- FOOTER -->
+<footer class="container">
+<p class="float-end"><a href="#">Back to top</a></p>
+<p>&copy; made by Mohannad Saadeh &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+</footer>
+</main>
+<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+</html>

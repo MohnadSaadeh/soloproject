@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Adding a Pacients</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> 
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="/docs/5.3/assets/js/color-modes.js"></script>
+    <script src="{% static 'js/scripts.js' %}" defer></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <header data-bs-theme="dark">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">ClinicMate</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                    <a class="btn btn-outline-secondary" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="btn btn-outline-secondary" href="/pacients_page">Our Pacients</a>
+                    </li>
+                    
+                </ul>
+            <div class="login_admin" >
+                <h5><a href="/logout"> Log Out </a></h5>
+        
+                
+            </div>
+<!-- ------ -->
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="w-100 text-center">
+        <form id="search-form"   outocomplete = "off">
+            {% csrf_token %}
+            <input id="search-input" class="form-control me-2" type="search" placeholder="Search for a pacient" aria-label="Search">
+        </form>
+        <div id="results-box" class="results-card not-visible"></div>
+    </div>
+</div>
+    <button class="btn btn-outline-success" onclick="openNav()">Search</button>
+
+<!--------- -->
+            </div>
+        </div>
+        </nav>
+        </header>
+
+
+<main>
+<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+<!-- -------------------------------------------------------------------------------- -->
+
+
+    <section class="" style="background-color: #eee;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                    <div class="row justify-content-center" >
+                        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Pacients</p>
+                        <!-- TABLE -->
+                        <table class="table align-middle mb-1 bg-white" >
+                            <thead class="bg-light">
+                                <tr>
+                                <th>Name</th>
+                                <th>Phone Number</th>
+                                <th>Identity Number</th>
+                                <th>Pacient Details</th>
+                                <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ------------------ for loop ------------------- -->
+                                {% for pacient in pacients %}
+                                <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                    <img
+                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                        alt=""
+                                        style="width: 45px; height: 45px"
+                                        class="rounded-circle"
+                                        />
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">{{pacient.patient_first_name}} {{pacient.patient_last_name}}</p>
+                                        <p class="text-muted mb-0">john.doe@gmail.com</p>
+                                    </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="fw-normal mb-1"> {{pacient.patient_phone_number}} </p>
+                                    <p class="text-muted mb-0">IT department</p>
+                                </td>
+                                <td>
+                                    <span  > {{pacient.pacient_identity_number}} </span>
+                                </td>
+                                <td>{{pacient.pacient_details}}</td>
+                                <td>
+                                    <div class="btn-group shadow-0" role="group" role="group" aria-label="Basic example">
+                                        <a class="btn btn-danger" href="/add_clinic_page" data-mdb-ripple-init>Details </a><!--add doctor and a clinic you have to add at thr top-->
+                                        <a class="btn btn-success" href="/appointment/{{pacient.id}}" data-mdb-ripple-init>Appointment</a> <!--add doctor and a clinic you have to add at thr top-->
+                                    </div>
+                                    
+                                    
+                                </td>
+                                </tr>
+                                {%endfor%}
+                                <!-- ---------------------------------------------- -->
+                            </tbody>
+                        </table>
+                        <!-- TABLE -->
+                    
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
+    
+<!-- -------------------------------------------------------------------------------- -->
+</div><!-- /.container -->
+
+<!-- FOOTER -->
+<footer class="container">
+<p class="float-end"><a href="#">Back to top</a></p>
+<p>&copy; made by Mohannad Saadeh &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+</footer>
+</main>
+<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+</html>
